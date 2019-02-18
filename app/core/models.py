@@ -33,4 +33,4 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     USERNAME_FIELD = 'email'
 
-    xx - 2
+    xx - 2 
