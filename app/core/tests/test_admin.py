@@ -29,7 +29,6 @@ class AdminSiteTests(TestCase):
     def test_user_change_page(self):
         """Test that the user edit page works"""
         url = reverse('admin:core_user_change', args=[self.user.id])
-        # e.g. '/admin/core/user/3'
         res = self.client.get(url)
 
         self.assertEqual(res.status_code, 200)
