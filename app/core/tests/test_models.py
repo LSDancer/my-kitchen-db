@@ -31,7 +31,7 @@ class ModelTest(TestCase):
 
     def test_new_user_missing_email(self):
         """Test creating user with badly formed email raises error"""
-        with self.assertRaises(ValidationError):
+        with self.assertRaises(ValueError):
             get_user_model().objects.create_user(None, 'test123')
 
     def test_create_new_superuser(self):

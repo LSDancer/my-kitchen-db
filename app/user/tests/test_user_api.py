@@ -8,8 +8,6 @@ from rest_framework import status
 
 CREATE_USER_URL = reverse('user:create')
 TOKEN_URL = reverse('user:token')
-print("-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-")
-print(reverse('user:create'))
 
 
 def create_user(**params):
@@ -58,11 +56,8 @@ class PublicUserApiTests(TestCase):
         payload = {'email': 'test@somedmn.com', 'password': 'testpass'}
         create_user(**payload)
         res = self.client.post(TOKEN_URL, payload)
-        print(res)
-        print(res.content)
         self.assertEqual(res.status_code, status.HTTP_200_OK)
         self.assertIn('token', res.data)
-
 
     def test_create_token_invalid_credentials(self):
         """Test that token is not created if invalid credentials are given"""
@@ -87,6 +82,9 @@ class PublicUserApiTests(TestCase):
 
     def test_create_token_missing_email_in_request(self):
         """Test that email is required"""
-        res = self.client.post(TOKEN_URL, {'email': '', 'password': 'somePasswd'})
+        res = self.client.post(
+            TOKEN_URL,
+            {'email': '', 'password': 'somePasswd'}
+        )
         self.assertNotIn('token', res.data)
         self.assertEqual(res.status_code, status.HTTP_400_BAD_REQUEST)
